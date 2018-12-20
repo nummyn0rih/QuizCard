@@ -1,5 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class QuizCardBuilder {
@@ -63,5 +69,52 @@ public class QuizCardBuilder {
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.setSize(500, 600);
         frame.setVisible(true);
+    }
+
+    public class NextCardListener implements ActionListener {
+        public void actionPerformed(ActionEvent ev) {
+            QuizCard card = new QuizCard(question.getText(), answer.getText());
+            cardList.add(card);
+            clearCard();
+        }
+    }
+
+    public class SaveMenuListener implements ActionListener {
+        public void actionPerformd(ActionEvent ev) {
+            QuizCard card = new QuizCard(question.getText(), answer.getText());
+            cardList.add(card);
+
+            JFileChooser fileSave = new JFileChooser();
+            fileSave.showSaveDialog(frame);
+            saveFile(fileSave.getSelectedFile());
+        }
+    }
+
+    public class NewMenuListener implements ActionListener {
+        public void actionPerformd(ActionEvent ev) {
+            cardList.clear();
+            clearCard();
+        }
+    }
+
+    private void clearCard() {
+        question.setText("");
+        answer.setText("");
+        question.requestFocus();
+    }
+
+    private void saveFile(File file) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+            for (QuizCard card: cardList) {
+                writer.write(card.getQuestion() + "/");
+                writer.write(card.getAnswer() + "\n");
+            }
+            writer.close();
+        } catch (IOException ex) {
+            System.out.println("couldn't write the cardList out");
+            ex.printStackTrace();
+        }
     }
 }
