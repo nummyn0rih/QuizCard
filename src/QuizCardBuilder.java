@@ -31,7 +31,7 @@ public class QuizCardBuilder {
         question.setFont(bigFont);
 
         JScrollPane qScroller = new JScrollPane(question);
-        qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         qScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         answer = new JTextArea(6, 20);
@@ -40,7 +40,7 @@ public class QuizCardBuilder {
         answer.setFont(bigFont);
 
         JScrollPane aScroller = new JScrollPane(question);
-        aScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        aScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         aScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         JButton nextButton = new JButton("Next Card");
@@ -80,7 +80,7 @@ public class QuizCardBuilder {
     }
 
     public class SaveMenuListener implements ActionListener {
-        public void actionPerformd(ActionEvent ev) {
+        public void actionPerformed(ActionEvent ev) {
             QuizCard card = new QuizCard(question.getText(), answer.getText());
             cardList.add(card);
 
@@ -91,7 +91,7 @@ public class QuizCardBuilder {
     }
 
     public class NewMenuListener implements ActionListener {
-        public void actionPerformd(ActionEvent ev) {
+        public void actionPerformed(ActionEvent ev) {
             cardList.clear();
             clearCard();
         }

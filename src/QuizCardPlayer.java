@@ -29,11 +29,14 @@ public class QuizCardPlayer {
         JPanel mainPanel = new JPanel();
         Font bigFont = new Font("sanserif", Font.BOLD, 24);
 
+        display = new JTextArea(10, 20);
+        display.setFont(bigFont);
+
         display.setLineWrap(true);
         display.setEditable(false);
 
         JScrollPane qScroller = new JScrollPane(display);
-        qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         qScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         nextButton = new JButton("Show Question");
         mainPanel.add(qScroller);
@@ -62,6 +65,14 @@ public class QuizCardPlayer {
                 display.setText("That was last card");
                 nextButton.setEnabled(false);
             }
+        }
+    }
+
+    public class OpenMenuListener implements ActionListener {
+        public void actionPerformed(ActionEvent ev) {
+            JFileChooser fileOpen = new JFileChooser();
+            fileOpen.showOpenDialog(frame);
+            loadFile(fileOpen.getSelectedFile());
         }
     }
 
